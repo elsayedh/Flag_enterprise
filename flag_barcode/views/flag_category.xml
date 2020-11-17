@@ -1,0 +1,56 @@
+<odoo>
+
+    <data>
+
+        <record id="flag_category_tree" model="ir.ui.view">
+            <field name="name">flag.category.tree</field>
+            <field name="model">flag.category</field>
+            <field name="arch" type="xml">
+                <tree default_order="id asc">
+                    <field name="barcode"/>
+                    <field name="category"/>
+                    <field name="place_holder" string="&#160;"/>
+                    <field name="place_holder" string="&#160;"/>
+                    <field name="place_holder" string="&#160;"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="flag_category_form" model="ir.ui.view">
+            <field name="name">flag.category.form</field>
+            <field name="model">flag.category</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                    <group>
+                        <field name="barcode" placeholder="Barcode" style="width:50%"/>
+                        <field name="category" placeholder="Category Name" style="width:50%"/>
+                    </group>
+                    </sheet>
+
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="flag_category_action" model="ir.actions.act_window">
+            <field name="name">Flag Category</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">flag.category</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="flag_category_menu"
+                  name="Flag Category"
+                  action="flag_category_action"
+                  parent="flyration_flag_main_menu"
+                  sequence="4"
+                  />
+
+    </data>
+</odoo>

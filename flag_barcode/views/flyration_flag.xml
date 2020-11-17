@@ -1,0 +1,73 @@
+<odoo>
+
+    <data>
+
+        <record id="flyration_flag_tree" model="ir.ui.view">
+            <field name="name">flyration.flag.tree</field>
+            <field name="model">flyration.flag</field>
+            <field name="arch" type="xml">
+                <tree default_order="id asc">
+                    <field name="barcode"/>
+                    <field name="ratio_related"/>
+                    <field name="place_holder" string="&#160;"/>
+                    <field name="place_holder" string="&#160;"/>
+                    <field name="place_holder" string="&#160;"/>
+                    <field name="place_holder" string="&#160;"/>
+                    <field name="place_holder" string="&#160;"/>
+                    <field name="place_holder" string="&#160;"/>
+                    <field name="place_holder" string="&#160;"/>
+                    <field name="place_holder" string="&#160;"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="flyration_flag_form" model="ir.ui.view">
+            <field name="name">flyration.flag.form</field>
+            <field name="model">flyration.flag</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                    <group>
+                        <field name="barcode" placeholder="Barcode" style="width:50%"/>
+                        <field name="ratio_related" placeholder="Flyration" style="width:50%"/>
+                    </group>
+                    </sheet>
+
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="flyration_flag_action" model="ir.actions.act_window">
+            <field name="name">Flag Flyratio</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">flyration.flag</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="flyration_flag_main_menu_root"
+                  name="Generate Barcode"
+                  web_icon="flag_barcode,static/description/icon.png"
+                  sequence="3"
+                  />
+
+        <menuitem id="flyration_flag_main_menu"
+                  name="Flag Configuration"
+                  parent="flyration_flag_main_menu_root"
+                  sequence="3"
+                  />
+
+        <menuitem id="flyration_flag_menu"
+                  name="Flag FlyRatio"
+                  action="flyration_flag_action"
+                  parent="flyration_flag_main_menu"
+                  sequence="4"
+                  />
+
+    </data>
+</odoo>

@@ -1,0 +1,78 @@
+<odoo>
+    <data>
+
+        <record model="report.paperformat" id="paperformat_sale_invoice_report">
+        <field name="name">paperformat.sale.invoice.report</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="page_width">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">5</field>
+        <field name="margin_right">5</field>
+        <field name="margin_bottom">23</field>
+        <field name="margin_left">5</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">15</field>
+        <field name="dpi">90</field>
+        </record>
+
+        <report
+        id="sale.action_report_saleorder"
+        string="Quotation / Order"
+        model="sale.order"
+        report_type="qweb-pdf"
+        file="sales_custom_report.report_saleorder"
+        name="sales_custom_report.report_saleorder"
+        paperformat="paperformat_sale_invoice_report"
+        print_report_name="(object.state in ('draft', 'sent') and 'Quotation - %s' % (object.name)) or 'Order - %s' % (object.name)"
+        />
+
+        <report
+        id="custom_report_saleorder_ar"
+        string="Quotation / Order AR"
+        model="sale.order"
+        report_type="qweb-pdf"
+        file="sales_custom_report.demo_report_saleorder_ar"
+        name="sales_custom_report.demo_report_saleorder_ar"
+        paperformat="paperformat_sale_invoice_report"
+        print_report_name="(object.state in ('draft', 'sent') and 'Quotation - %s' % (object.name)) or 'Order - %s' % (object.name)"
+        />
+
+        <report
+        id="custom_report_saleorder_en"
+        string="Quotation / Order EN"
+        model="sale.order"
+        report_type="qweb-pdf"
+        file="sales_custom_report.demo_report_saleorder_en"
+        name="sales_custom_report.demo_report_saleorder_en"
+        paperformat="paperformat_sale_invoice_report"
+        print_report_name="(object.state in ('draft', 'sent') and 'Quotation - %s' % (object.name)) or 'Order - %s' % (object.name)"
+        />
+
+
+        <report
+        id="custom_report_saleorder_ar2"
+        string="Quotation / Order AR + H"
+        model="sale.order"
+        report_type="qweb-pdf"
+        file="sales_custom_report.demo_report_saleorder_ar2"
+        name="sales_custom_report.demo_report_saleorder_ar2"
+        paperformat="paperformat_sale_invoice_report"
+        print_report_name="(object.state in ('draft', 'sent') and 'Quotation - %s' % (object.name)) or 'Order - %s' % (object.name)"
+        />
+
+        <report
+        id="custom_report_saleorder_en2"
+        string="Quotation / Order EN + H"
+        model="sale.order"
+        report_type="qweb-pdf"
+        file="sales_custom_report.demo_report_saleorder_en2"
+        name="sales_custom_report.demo_report_saleorder_en2"
+        paperformat="paperformat_sale_invoice_report"
+        print_report_name="(object.state in ('draft', 'sent') and 'Quotation - %s' % (object.name)) or 'Order - %s' % (object.name)"
+        />
+
+
+    </data>
+</odoo>

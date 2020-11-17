@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sales_tender,access_sales_tender,model_sales_tender,group_sales_tender_user,1,1,1,1
+access_sales_tender_lines,access_sales_tender_lines,model_sales_tender_lines,group_sales_tender_user,1,1,1,1
+access_tender_document,access_tender_document,model_tender_document,group_sales_tender_user,1,1,1,1
+access_product_tender_document,access_product_tender_document,model_product_tender_document,group_sales_tender_user,1,1,1,1
+access_supplier_tender,access_supplier_tender,model_supplier_tender,group_sales_tender_user,1,1,1,1
+access_supplier_tender_document,access_supplier_tender_document,model_supplier_tender_document,group_sales_tender_user,1,1,1,1

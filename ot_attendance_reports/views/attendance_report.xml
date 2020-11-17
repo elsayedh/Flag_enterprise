@@ -1,0 +1,44 @@
+<odoo>
+    <record model="ir.ui.view" id="action_attendance_report_wizard1">
+        <field name="name">Attendance Report</field>
+        <field name="model">attendance.report.wizard</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Attendance Report">
+                <group>
+                    <group>
+                        <field name="start_date"/>
+                    </group>
+                    <group>
+                        <field name="end_date"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="get_attendance_report" string="Get Report" type="object" class="oe_highlight"/>
+                    <button string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <act_window id="action_attendance_report_wizard"
+                name="Attendance"
+                res_model="attendance.report.wizard"
+                view_mode="form"
+                target="new"/>
+
+    <menuitem id="menu_hr_attendance_report1"
+              name="Attendance Analysis"
+              parent="hr_attendance.menu_hr_attendance_report"
+              sequence="1"
+              groups="hr_attendance.group_hr_attendance_user"
+              action="hr_attendance.hr_attendance_action_graph"/>
+
+    <menuitem id="menu_hr_attendance_report2"
+              name="Attendance Reports"
+              parent="hr_attendance.menu_hr_attendance_report"
+              sequence="2"
+              groups="hr_attendance.group_hr_attendance_user"
+              action="action_attendance_report_wizard"/>
+
+</odoo>

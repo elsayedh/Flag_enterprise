@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- QWeb Reports -->
+
+        <record model="report.paperformat" id="paperformat_custom_invoice_report">
+        <field name="name">paperformat.custom.invoice.report</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="page_width">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">5</field>
+        <field name="margin_right">5</field>
+        <field name="margin_bottom">23</field>
+        <field name="margin_left">5</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">15</field>
+        <field name="dpi">90</field>
+        </record>
+
+
+        <report
+        id="account.account_invoices"
+        model="account.move"
+        string="Invoices"
+        report_type="qweb-pdf"
+        name="sales_custom_report.custom_report_invoice_with_payments"
+        file="sales_custom_report.custom_report_invoice_with_payments"
+        paperformat="paperformat_custom_invoice_report"
+        attachment="(object.state in ('open','in_payment','paid')) and ('INV'+(object.number or '').replace('/','')+'.pdf')"
+        print_report_name="(object._get_report_base_filename())"
+        groups="account.group_account_invoice" />
+
+        <report
+        id="account.account_invoices_without_payment"
+        model="account.move"
+        string="Invoices Without Payment"
+        report_type="qweb-pdf"
+        name="sales_custom_report.custom_report_invoice"
+        file="sales_custom_report.custom_report_invoice"
+        paperformat="paperformat_custom_invoice_report"
+        attachment="(object.state in ('open','in_payment','paid')) and ('INV'+(object.number or '').replace('/','')+'.pdf')"
+        print_report_name="(object._get_report_base_filename())"
+        groups="account.group_account_invoice" />
+
+        <report
+        id="account_invoices_custom_en"
+        model="account.move"
+        string="Invoices EN"
+        report_type="qweb-pdf"
+        name="sales_custom_report.custom_report_invoice_with_payments_en"
+        file="sales_custom_report.custom_report_invoice_with_payments_en"
+        paperformat="paperformat_custom_invoice_report"
+        attachment="(object.state in ('open','in_payment','paid')) and ('INV'+(object.number or '').replace('/','')+'.pdf')"
+        print_report_name="(object._get_report_base_filename())"
+        groups="account.group_account_invoice" />
+
+        <report
+        id="account_invoices_custom_en2"
+        model="account.move"
+        string="Invoices EN +H"
+        report_type="qweb-pdf"
+        name="sales_custom_report.custom_report_invoice_with_payments_en2"
+        file="sales_custom_report.custom_report_invoice_with_payments_en2"
+        paperformat="paperformat_custom_invoice_report"
+        attachment="(object.state in ('open','in_payment','paid')) and ('INV'+(object.number or '').replace('/','')+'.pdf')"
+        print_report_name="(object._get_report_base_filename())"
+        groups="account.group_account_invoice" />
+
+        <report
+        id="account_invoices_custom_ar"
+        model="account.move"
+        string="Invoices AR"
+        report_type="qweb-pdf"
+        name="sales_custom_report.custom_report_invoice_with_payments_ar"
+        file="sales_custom_report.custom_report_invoice_with_payments_ar"
+        paperformat="paperformat_custom_invoice_report"
+        attachment="(object.state in ('open','in_payment','paid')) and ('INV'+(object.number or '').replace('/','')+'.pdf')"
+        print_report_name="(object._get_report_base_filename())"
+        groups="account.group_account_invoice" />
+
+        <report
+        id="account_invoices_custom_ar2"
+        model="account.move"
+        string="Invoices AR +H"
+        report_type="qweb-pdf"
+        name="sales_custom_report.custom_report_invoice_with_payments_ar2"
+        file="sales_custom_report.custom_report_invoice_with_payments_ar2"
+        paperformat="paperformat_custom_invoice_report"
+        attachment="(object.state in ('open','in_payment','paid')) and ('INV'+(object.number or '').replace('/','')+'.pdf')"
+        print_report_name="(object._get_report_base_filename())"
+        groups="account.group_account_invoice" />
+
+
+
+    </data>
+</odoo>

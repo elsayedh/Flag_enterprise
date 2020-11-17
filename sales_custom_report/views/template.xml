@@ -1,0 +1,67 @@
+<odoo>
+    <data>
+
+        <record id="sales_custom_report_company_inherit" model="ir.ui.view">
+            <field name="name">General Chief</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+                <notebook position="inside">
+                <page string="Company Information">
+                    <group width="100%">
+                    <group width="50%">
+                    <field name="company_chief_ar"/>
+                    <field name="company_chief_en"/>
+                    <field name="stamp_img" widget="image" groups="sales_custom_report.group_sales_report_manager"/>
+                    </group>
+                    </group>
+                </page>
+                </notebook>
+            </field>
+
+        </record>
+
+        <record id="account_move_custom_inherit" model="ir.ui.view">
+            <field name="name">account.move.custom.inherit</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//tree/field[@name='quantity']" position="replace">
+                    <field name="quantity"  digits="[4,0]"/>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="sales_order_custom_inherit" model="ir.ui.view">
+            <field name="name">sale.order.custom.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//tree/field[@name='product_uom_qty']" position="replace">
+                    <field name="product_uom_qty" digits="[4,0]"/>
+                </xpath>
+
+            </field>
+        </record>
+
+
+<!--        <record id="sales_custom_report_sale_inherit" model="ir.ui.view">-->
+<!--            <field name="name">General Chief</field>-->
+<!--            <field name="model">sale.order</field>-->
+<!--            <field name="inherit_id" ref="sale.view_order_form"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <field name="payment_term_id" position="after">-->
+<!--&lt;!&ndash;                    <field name="supply_duration"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <field name="validate_duration"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <field name="total_all"/>&ndash;&gt;-->
+<!--                </field>-->
+<!--            </field>-->
+
+<!--        </record>-->
+
+
+    </data>
+</odoo>

@@ -1,0 +1,12 @@
+<odoo>
+    <data>
+
+        <template id="report_assets_common_custom" name="Custom QWeb Report" inherit_id="web.report_assets_common">
+            <xpath expr="." position="inside">
+                <link href="/sales_custom_report/static/src/less/custom_font.less" rel="stylesheet" type="text/less"/>
+                <link href="/sales_custom_report/static/src/less/custom_style.less" rel="stylesheet" type="text/less"/>
+            </xpath>
+        </template>
+
+    </data>
+</odoo>

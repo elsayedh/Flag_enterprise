@@ -1,0 +1,140 @@
+<odoo>
+
+    <data>
+
+        <record id="tender_sales_tree" model="ir.ui.view">
+            <field name="name">sales.tender.tree</field>
+            <field name="model">sales.tender</field>
+            <field name="arch" type="xml">
+                <tree string="Tenders" default_order="id desc"
+                      decoration-warning="state == 'approve'"
+                      decoration-success="state == 'confirm'"
+                      decoration-danger="state == 'cancel'">
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <field name="ordering_date"/>
+                    <field name="delivery_date"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="tender_sales_form" model="ir.ui.view">
+            <field name="name">sales.tender</field>
+            <field name="model">sales.tender</field>
+            <field name="arch" type="xml">
+                <form>
+
+                <header>
+                    <button name="button_approve" states="draft"
+                        string="Approve" type="object"
+                        class="oe_highlight"
+                        groups="uat_sales_tender.group_sales_tender_manager"/>
+
+                    <button string="Print" states="approve,confirm"
+                        type="object" name="print_report_action"
+                        class="oe_highlight"/>
+
+                    <button name="button_cancel" states="approve"
+                        string="Cancel" type="object"
+                        groups="uat_sales_tender.group_sales_tender_manager"/>
+
+                    <button name="create_tender_so" states="approve"
+                        string="Confirm" type="object"
+                        class="oe_highlight"
+                        groups="uat_sales_tender.group_sales_tender_manager"/>
+
+                    <button name="button_to_draft" states="cancel"
+                        string="Set to draft" type="object"
+                        class="oe_highlight"
+                        groups="uat_sales_tender.group_sales_tender_manager"/>
+
+                    <field name="state" widget="statusbar"
+                        statusbar_visible="draft,approve,confirm,cancel"
+                        statusbar_colors='{"confirm":"blue"}'/>
+                </header>
+
+                    <sheet>
+                        <div class="oe_button_box" name="button_box"/>
+                        <group>
+<!--                            <group>-->
+<!--                              <field name="sale_id" readonly="1"/>-->
+<!--                              <button name="transfer_quantity_to_product" string="Transfer Product" type="object" />-->
+<!--                            </group>-->
+<!--                            <group>-->
+<!--                              <field name="invoice_id" readonly="1"/>-->
+<!--                              <field name="period"/>-->
+<!--                            </group>-->
+                        <group>
+                            <field name="name"/>
+                            <field name="company_id"/>
+                            <field name="partner_id"/>
+                            <separator/>
+                            <field name="ordering_date"/>
+                            <field name="delivery_date"/>
+                        </group>
+                        <group string="Address">
+                            <label for="street" string="Address"/>
+                            <div class="o_address_format">
+                                <field name="street" placeholder="Street..." class="o_address_street"/>
+                                <field name="street2" placeholder="Street 2..." class="o_address_street"/>
+                                <field name="city" placeholder="City" class="o_address_city"/>
+                                <field name="c_state" class="o_address_state" placeholder="State" options='{"no_open": True}'/>
+                                <field name="zip" placeholder="ZIP" class="o_address_zip"/>
+                                <field name="country" placeholder="Country" class="o_address_country" options='{"no_open": True, "no_create": True}'/>
+                            </div>
+                            <field name="website" widget="url" placeholder="e.g. www.odoo.com"/>
+                        </group>
+
+                        </group>
+                        <notebook>
+                            <page string="Tender Lines">
+                                <field name="tender_ids">
+
+                                    <tree editable="bottom">
+                                        <field name="sequence" widget="handle"/>
+                                        <field name="product_id"/>
+                                        <field name="description"/>
+
+<!--                                        <field name="tax_ids" widget="many2many_tags" />-->
+                                        <field name="product_uom_id" />
+                                        <field name="quantity"/>
+                                        <field name="price" />
+                                        <field name="total" />
+                                        <field class="center" name="note"/>
+                                        <button string="Documents" class="oe_highlight" name="document_view2" type="object" />
+                                        <field string="Docs" name="document_count2"/>
+                                <!--                                        <button name="transfer_product_quantity"-->
+<!--                                                string="Delivery QTY"-->
+<!--                                                type="object" />-->
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="sales_tender_action" model="ir.actions.act_window">
+            <field name="name">Tender Sales</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sales.tender</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="sales_tender_root" name="Sales Tenders" web_icon="uat_sales_tender,static/description/icon.png"/>
+        <menuitem id="sales_tender_child" parent="sales_tender_root" name="Tenders" sequence="2"/>
+        <menuitem id="tender_sales_menu"
+                  name="Tenders"
+                  action="sales_tender_action"
+                  parent="sales_tender_child"
+                  sequence="2"
+                  />
+    </data>
+</odoo>

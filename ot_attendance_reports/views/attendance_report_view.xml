@@ -1,0 +1,103 @@
+<odoo>
+    <record model="report.paperformat" id="paperformat_attendance_report">
+        <field name="name">paperformat.attendance.report</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="page_width">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">30</field>
+        <field name="margin_right">5</field>
+        <field name="margin_bottom">10</field>
+        <field name="margin_left">5</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">20</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <report id="attendance_report"
+            model="attendance.report.wizard"
+            string="Attendance Report"
+            report_type="qweb-pdf"
+            name="ot_attendance_reports.attendance_report_view"
+            paperformat="paperformat_attendance_report"
+            menu="False"/>
+
+    <template id="attendance_report_view">
+        <t t-call="web.html_container">
+            <div class="header" style="border-bottom: 2px solid black">
+                <div>
+               <h3 class="text-center">Attendance Report</h3>
+                <h4 class="text-center">
+                        <strong>From</strong>:
+                        <t t-esc="date_start"/>
+                        <strong>To</strong>:
+                        <t t-esc="date_end"/>
+                </h4>
+                </div>
+                <div style="position: absolute; top:0; right:0; margin-right:20px">
+                    <h4>
+                        <strong t-field="res_company.name"></strong>
+                    </h4>
+
+                    <p style="font-size: 14px;text-align:center"  t-field="res_company.phone"></p>
+                </div>
+                <div style="position: absolute; top:0; left:0; margin-right:20px">
+                    <img t-if="res_company.logo" alt="Company LOGO"
+                         t-att-src="'data:image/png;base64,%s' % to_text(res_company.logo)"
+                         width="150" hight="150"/>
+                </div>
+                <br/>
+
+            </div>
+             <br/>
+             <br/>
+
+
+            <div class="article">
+                <br/>
+                <table  style="border-collapse: collapse;border: 2px solid #ddd;font-size:20px; width:100%;padding-top:0;margin-top:0">
+                    <tr class="thead-light" style="padding:0px; margin:0px;border-top: 2px solid #ddd;background-color: #f2f2f2;">
+                        <th class="text-center" style="padding: 8px;border: 2px solid #ddd;text-align: left;width: 37.5%">Employee</th>
+                        <th class="text-center" style="padding: 8px;border: 2px solid #ddd;text-align: left;width: 22.5%">Check In</th>
+                        <th class="text-center" style="padding: 8px;border: 2px solid #ddd;text-align: center;width: 22.5%">Check Out</th>
+                        <th class="text-center" style="padding: 8px;border: 2px solid #ddd;text-align: left;width: 17.5%">Worked Hours</th>
+                    </tr>
+
+                   <tr t-foreach="docs" t-as="doc" >
+                        <td style="padding: 8px;border: 2px solid #ddd;text-align: center; width:37.5%">
+                           <span t-esc="doc['employee']"/>
+                       </td>
+                       <td style="padding: 8px;border: 2px solid #ddd;text-align: center; width:22.5%">
+                           <span t-esc="doc['check_in']"/>
+                       </td>
+                       <td style="padding: 8px;border: 2px solid #ddd;text-align: center;width:22.5%">
+                           <span t-esc="doc['check_out']"/>
+                       </td>
+                      <td style="padding: 8px;border: 2px solid #ddd;text-align: center; width:17.5%">
+                           <span t-esc="doc['worked_hours']"/>
+                       </td>
+                   </tr>
+                </table>
+
+                <br/>
+            </div>
+            <div class="footer">
+                <div class="row text-center" style="border-top: 1px solid black;">
+                    <div class="col col-3 offset-9 text-right">
+                        <ul class="list-inline mt-2">
+                            <li class="list-inline-item">Page:</li>
+                            <li class="list-inline-item">
+                                <span class="page"/>
+                            </li>
+                            <li class="list-inline-item">/</li>
+                            <li class="list-inline-item">
+                                <span class="topage"/>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>
